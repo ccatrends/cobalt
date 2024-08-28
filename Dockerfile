@@ -28,18 +28,18 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Step 3: Combine Node.js and Python in the final image
-FROM python:3.9-slim as final
-
-# Copy the application code
-COPY . /app
+FROM python-base as final
 
 # Copy Node.js setup from the previous stage
 COPY --from=node-base /cobalt /cobalt
 
 WORKDIR /app
 
+# Copy all application code
+COPY . .
+
 # Expose ports for Flask and Cobalt
 EXPOSE 8080 9000
 
 # Start both the Cobalt and Flask servers
-CMD ["sh", "-c", "node /cobalt/src/cobalt & python app.py"]
+CMD ["sh", "-c", "node /cobalt/src/cobalt & python /app/app.py"]
