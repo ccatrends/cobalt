@@ -28,10 +28,13 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Step 3: Combine Node.js and Python in the final image
-FROM python-base as final
+FROM python:3.9-slim as final
+
+# Install Node.js in the final image
+RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
 
 # Copy Node.js setup from the previous stage
-COPY --from=node-base / /cobalt
+COPY --from=node-base / /
 
 WORKDIR /app
 
