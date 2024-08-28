@@ -6,8 +6,8 @@ WORKDIR /app
 # Copy the requirements.txt to install dependencies
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies and print installed packages
+RUN pip install --no-cache-dir -r requirements.txt && pip list
 
 # Step 2: Use Node.js base image to install Node.js dependencies for Cobalt
 FROM node:18-bullseye-slim AS node-base
@@ -40,6 +40,9 @@ WORKDIR /app
 
 # Copy all application code
 COPY . .
+
+# Print Python path and installed packages for debugging
+RUN echo $PYTHONPATH && pip list
 
 # Expose ports for Flask and Cobalt
 EXPOSE 8080 9000
