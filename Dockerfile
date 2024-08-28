@@ -1,4 +1,15 @@
-# Step 1: Use Node.js base image to install Node.js dependencies for Cobalt
+# Step 1: Use Python base image to set up the environment for Flask
+FROM python:3.9-slim AS python-base
+
+WORKDIR /app
+
+# Copy the requirements.txt to install dependencies
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Step 2: Use Node.js base image to install Node.js dependencies for Cobalt
 FROM node:18-bullseye-slim AS node-base
 
 WORKDIR /cobalt
@@ -15,17 +26,6 @@ RUN apt-get update && \
 
 # Copy Cobalt app files
 COPY . .
-
-# Step 2: Use Python base image to set up the environment for Flask
-FROM python:3.9-slim AS python-base
-
-WORKDIR /app
-
-# Copy the requirements.txt to install dependencies
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
 
 # Step 3: Combine Node.js and Python in the final image
 FROM python:3.9-slim as final
