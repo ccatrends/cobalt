@@ -27,11 +27,11 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code
-COPY . .
-
 # Step 3: Combine Node.js and Python in the final image
-FROM python-base as final
+FROM python:3.9-slim as final
+
+# Copy the application code
+COPY . /app
 
 # Copy Node.js setup from the previous stage
 COPY --from=node-base /cobalt /cobalt
