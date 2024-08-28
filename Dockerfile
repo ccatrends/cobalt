@@ -31,7 +31,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 FROM python-base as final
 
 # Copy Node.js setup from the previous stage
-COPY --from=node-base /cobalt /cobalt
+COPY --from=node-base / /cobalt
 
 WORKDIR /app
 
