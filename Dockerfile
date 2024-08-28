@@ -33,6 +33,10 @@ FROM python:3.9-slim as final
 # Install Node.js in the final image
 RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
 
+# Copy installed Python dependencies from python-base
+COPY --from=python-base /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+COPY --from=python-base /usr/local/bin /usr/local/bin
+
 # Copy Node.js setup from the previous stage
 COPY --from=node-base /cobalt /cobalt
 
