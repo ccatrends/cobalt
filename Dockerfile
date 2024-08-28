@@ -1,4 +1,4 @@
-# Step 1: Install Node.js and dependencies for Cobalt
+# Step 1: Use Node.js base image to install Node.js dependencies for Cobalt
 FROM node:18-bullseye-slim AS node-base
 
 WORKDIR /cobalt
@@ -34,7 +34,7 @@ FROM python:3.9-slim as final
 RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
 
 # Copy Node.js setup from the previous stage
-COPY --from=node-base / /
+COPY --from=node-base /cobalt /cobalt
 
 WORKDIR /app
 
