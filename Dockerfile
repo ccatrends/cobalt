@@ -7,6 +7,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+# Set FLASK_ENV to production
+ENV FLASK_ENV production
+
 # Copy your application code
 COPY . .
 
