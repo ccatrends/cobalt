@@ -14,7 +14,7 @@ ENV FLASK_ENV production
 COPY . .
 
 # Expose the port your Flask app will listen on (e.g., 5000)
-EXPOSE 9000
+EXPOSE 5000
 
 # Run your Flask app
 CMD ["python", "app.py"]
