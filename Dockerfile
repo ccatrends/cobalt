@@ -13,7 +13,7 @@ ENV FLASK_ENV production
 # Copy your application code
 COPY . .
 
-# Expose the port your Flask app will listen on (e.g., 9000)
+# Expose the port your Flask app will listen on
 EXPOSE 9000
 
 # Run your Flask app with Gunicorn
