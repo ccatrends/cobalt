@@ -2,14 +2,12 @@ version: '3.5'
 
 services:
   cobalt-api:
-    image: ghcr.io/imputnet/cobalt:7
+    build: .  # Build the Docker image using the local Dockerfile
     restart: unless-stopped
     container_name: cobalt-api
     init: true
     ports:
-      - "9000:9000/tcp"  # Expose port 9000 for cobalt-api service
-      # Uncomment the following line and remove the line above if using a reverse proxy
-      # - 127.0.0.1:9000:9000
+      - "9000:9000"  # Expose port 9000 for cobalt-api service
     environment:
       NODE_ENV: "production"
       PORT: "9000"
@@ -17,23 +15,17 @@ services:
       API_NAME: "test-service"  # Replace with your instance's distinctive name
       COBALT_CONFIG: "src/config.json"  # Path to your config file
       COBALT_DATA: "src/data"  # Path to your data directory
-      # Uncomment the following lines if you want to use cookies when fetching data from services
-      # COOKIE_PATH: "/cookies.json"
     labels:
       - com.centurylinklabs.watchtower.scope=cobalt
-    # Uncomment the following lines if using cookies for service requests
-    #volumes:
-    #  - ./cookies.json:/cookies.json
 
+  # Remove or adjust this section if it's not needed
   cobalt-web:
     image: ghcr.io/imputnet/cobalt:7
     restart: unless-stopped
     container_name: cobalt-web
     init: true
     ports:
-      - "9001:9001/tcp"  # Expose port 9001 for cobalt-web service
-      # Uncomment the following line and remove the line above if using a reverse proxy
-      # - 127.0.0.1:9001:9001
+      - "9001:9001"  # Expose port 9001 for cobalt-web service
     environment:
       NODE_ENV: "production"
       WEB_URL: "https://p01--test-service--pzsk2zbg498p.code.run/"  # Replace with your instance's web URL
