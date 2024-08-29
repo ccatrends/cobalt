@@ -13,8 +13,8 @@ services:
       PORT: "9000"
       API_URL: "https://p01--test-service--pzsk2zbg498p.code.run/"  # Replace with your instance's API URL
       API_NAME: "test-service"  # Replace with your instance's distinctive name
-      COBALT_CONFIG: "src/config.json"  # Path to your config file
-      COBALT_DATA: "src/data"  # Path to your data directory
+      COBALT_CONFIG: "/app/src/config.json"  # Correct path to your config file inside the Docker container
+      COBALT_DATA: "/app/src/data"  # Ensure this path is correct if this is a folder, ensure it exists in your Dockerfile or project
     labels:
       - com.centurylinklabs.watchtower.scope=cobalt
 
@@ -29,8 +29,8 @@ services:
       NODE_ENV: "production"
       WEB_URL: "https://p01--test-service--pzsk2zbg498p.code.run/"  # Replace with your instance's web URL
       API_URL: "https://p01--test-service--pzsk2zbg498p.code.run/"  # Replace with your preferred API instance URL
-      COBALT_CONFIG: "src/config.json"  # Path to your config file
-      COBALT_DATA: "src/data"  # Path to your data directory
+      COBALT_CONFIG: "/app/src/config.json"  # Path to your config file inside the Docker container
+      COBALT_DATA: "/app/src/data"  # Ensure this path is correct if this is a folder, ensure it exists in your Dockerfile or project
     labels:
       - com.centurylinklabs.watchtower.scope=cobalt
 
