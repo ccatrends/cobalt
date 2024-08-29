@@ -13,7 +13,7 @@ ENV FLASK_ENV=production
 # Copy your application code
 COPY . .
 
-# Copy the src directory to ensure all files are included
+# Ensure the src directory is correctly copied
 COPY src/ /app/src/
 
 # Expose the port your Flask app will listen on
